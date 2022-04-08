@@ -23,7 +23,11 @@ app.get("/:room", (req, res)=> {
 })
 
 socket.on("connection", connection => {
+  console.log("connection server event");
+
   connection.on("join-room", (roomId, userId) => {
+    console.log("join-room server event");
+    
     connection.join(roomId);
     connection.to(roomId).emit("user-connected", userId); 
   });
