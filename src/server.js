@@ -24,12 +24,13 @@ app.get("/:room", (req, res)=> {
 
 socket.on("connection", connection => {
   connection.on("join-room", (roomId, userId) => {
-    console.log(roomId);
-    console.log(userId);
-  })
+    connection.join(roomId);
+    connection.to(roomId).emit("user-connected", userId); 
+  });
+
 })
 
-app.listen(5000, () => {
-  console.log("listening on 500");
+server.listen(5000, () => {
+  console.log("server listening on 5000");
 })
 
